@@ -62,7 +62,6 @@ class gameMech{
         		break;
         	} else {
         		System.out.print(guess+" is not the color of "+item+"\n");
-        		System.out.print("DEBUG: TRIES LEFT: "+i+"\n");
         	}
         	if(i == 4) {
         		System.out.print("You used your 5 trials.\n");
@@ -90,18 +89,18 @@ public class GuessColorgame extends gameMech {
      */
     public static void main(String[] args) {
         gameMech game = new gameMech();
+        
         boolean isRunning = true;
         
         while (isRunning){
         System.out.println("\nWelcome!");
-        
         System.out.println("-----------------------");
         System.out.println("1. Color Guess Game ");
         System.out.println("2. Fire, Water, Grass Game");
         System.out.print("Please choose a number!(or type exit) :");
         Scanner scan = new Scanner(System.in);
         String choice = scan.nextLine();
-   
+        
         //Terminate the program
         if (choice.equalsIgnoreCase("exit")){
             System.out.println("Program Terminated Succesfully");
