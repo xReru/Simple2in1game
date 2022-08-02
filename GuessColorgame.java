@@ -15,77 +15,94 @@ import java.util.*;
 
 class gameMech{
     
-    // SETTINGS OF GAME 1 HERE!
-    void cgGame(){
-        System.out.print("\nWelcome to Color Guess Game\n");
-        // creating ArrayList
-        ArrayList<String> al = new ArrayList<String>();
-  
-        // adding object in ArrayList
-        al.add("Banana");
-        al.add("Orange");
-        al.add("Apple");
-        al.add("Cucumber");
-        al.add("Grapes");
-  
-        Collections.shuffle(al);
-  
-        Random random_method = new Random();
-        int index = random_method.nextInt(al.size());
-        int i;
-        String guess;
-        String color = null;
-        
-        Scanner sc = new Scanner(System.in);
-        
-        String item = al.get(index);
-        if(item == "Banana") {
-        	color = "Yellow";
-        }
-        else if(item == "Orange") {
-        	color = "Orange";
-        }
-        else if(item == "Apple") {
-        	color = "Red";
-        }
-        else if(item == "Cucumber") {
-        	color = "Green";
-        }
-        else if(item == "Grapes") {
-        	color = "Violet";
-        }
-        
-        System.out.print("What color is the "+item+"?\nYou have 5 tries to proceed on the next level.\n");
-        for(i = 0; i < 5; i++) {
-        	System.out.print("Answer=> ");
-        	guess = sc.nextLine();
-        	
-        	if(guess.equalsIgnoreCase(color)) {
-        		victory();
-        		break;
-        	} else {
-        		System.out.print(guess+" is not the color of "+item+"\n");
-        	}
-        	if(i == 4) {
-        		gameOver();
-        		System.out.print("The color of "+item+" is "+color+"\n");
-        	}
-        	
-        }
-    }
     
-    // SETTINGS OF GAME 2 HERE!
-    void fwgGame(){
-        for (int j = 0; j < 5; j++) {
-            play();
+    // SETTINGS OF GAME 1 HERE!
+
+    void cgGame(){
+        
+        for (int j = 1; j <= 5; j++) {
+            playCG();
+            
             if(j == 4) {
         		gameOver();
         	}
             }
     }
-    void play() {
+    
+    void playCG(){
+        int lvlCounter = 1;
+        String guess;
+        String color = null;
+        int i;
+        System.out.print("\nWelcome to Color Guess Game\n");
+        System.out.println("Level " + lvlCounter);
+        lvlCounter++;
+        // creating Array for the items
+        String []arr = {"Banana","Orange","Apple","Cucumber","Grapes"};
+  
+        Random random_method = new Random();
+        int index = random_method.nextInt(arr.length);
+        
+        Scanner sc = new Scanner(System.in);
+
+        if(arr[index].equals("Banana")) {
+        	color = "Yellow";
+        }
+        else if(arr[index].equals("Orange")) {
+        	color = "Orange";
+        }
+        else if(arr[index].equals("Apple")) {
+        	color = "Red";
+        }
+        else if(arr[index].equals("Cucumber")) {
+        	color = "Green";
+        }
+        else if(arr[index].equals("Grapes")) {
+        	color = "Violet";
+        }
+        
+        
+        for(i = 1; i <= 5; i++) {
+                System.out.print("What color is the "+arr[index]+"?\n");
+        	System.out.print("Answer=> ");
+        	guess = sc.nextLine();
+        	
+        	
+                if(guess.equalsIgnoreCase(color)) {
+        		victory();
+
+        	}
+                
+                else {
+        		System.out.print(guess+" is not the color of "+arr[index]+"\n");
+                        System.out.println("Level " + lvlCounter);
+        	}
+        	if(i == 4) {
+        		gameOver();
+        		System.out.print("The color of "+arr[index]+" is "+color+"\n");
+                        break;
+        	}
+        	
+        }
+}
+
+    
+    
+    // SETTINGS OF GAME 2 HERE!
+    void fwgGame(){
+        for (int j = 0; j < 5; j++) {
+            playFWG();
+            if(j == 4) {
+        		gameOver();
+        	}
+            }
+    }
+    void playFWG() {
+                int lvlCounter = 1;
     		Scanner scans = new Scanner(System.in);
                 System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
+                System.out.println("Level " + lvlCounter);
+                lvlCounter++;
     		System.out.print("Choose (fire, water, grass): ");
         	String yourmove = scans.nextLine();
         	
@@ -102,15 +119,18 @@ class gameMech{
         	else {
         		enemymove = "grass";
         	}
+                
         	System.out.print("Your Enemy chose: "+enemymove+"!\n");
         	
         	if(yourmove.equals(enemymove)) {
         		System.out.print("TIE!\n");
         	}
         	else if(youwin(yourmove, enemymove)) {
+                        System.out.println("Level " + lvlCounter);
         		victory();
         	}
         	else {
+                        System.out.println("Level " + lvlCounter);
         		gameOver();
         	}
     	}
@@ -124,10 +144,11 @@ class gameMech{
             }
     
         }
-    
+  
     //VICTORY MESSAGE HERE!
         void victory(){
             System.out.print("Congratulations! You are about to proceed to the next level!\n");
+            System.exit(0);
         }
         
     //DEFEAT MESSAGE HERE!
@@ -168,11 +189,13 @@ public class GuessColorgame extends gameMech {
         
         
         switch(choice){
+            //COLOR GUESS GAME
             case "1" :
                 game.cgGame();
             break;
             
             case "2":
+            //COLOR GUESS GAME
                 game.fwgGame();
             break;
         }
@@ -181,6 +204,6 @@ public class GuessColorgame extends gameMech {
         
         
     }
-    //FIRE WATER GRASS GAME
+    
         
 }
