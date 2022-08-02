@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 package guesscolorgame;
-import static guesscolorgame.GuessColorgame.play;
 import java.util.*;
 /**
  *
  * @author Janrell Quiaroro
  */
 
+// !GAME 1 = COLOR GUESS GAME
+// !GAME 2 = FIRE WATER GRASS GAME
 
 class gameMech{
-    void colorGuess(){
+    
+    // SETTINGS OF GAME 1 HERE!
+    void cgGame(){
         System.out.print("\nWelcome to Color Guess Game\n");
         // creating ArrayList
         ArrayList<String> al = new ArrayList<String>();
@@ -58,72 +61,29 @@ class gameMech{
         	guess = sc.nextLine();
         	
         	if(guess.equalsIgnoreCase(color)) {
-        		System.out.print("Congratulations! You are about to proceed to the next level!\n");
+        		victory();
         		break;
         	} else {
         		System.out.print(guess+" is not the color of "+item+"\n");
         	}
         	if(i == 4) {
-        		System.out.print("You used your 5 trials.\n");
+        		gameOver();
         		System.out.print("The color of "+item+" is "+color+"\n");
         	}
         	
         }
     }
     
+    // SETTINGS OF GAME 2 HERE!
     void fwgGame(){
         for (int j = 0; j < 5; j++) {
             play();
             if(j == 4) {
-        		System.out.print("You used your 5 trials.\n");
-        		System.out.print("You lose! Better Luck Next Time!\n");
+        		gameOver();
         	}
             }
     }
-
-}
-public class GuessColorgame extends gameMech {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        gameMech game = new gameMech();
-        
-        boolean isRunning = true;
-        
-        while (isRunning){
-        System.out.println("\nWelcome!");
-        System.out.println("-----------------------");
-        System.out.println("1. Color Guess Game ");
-        System.out.println("2. Fire, Water, Grass Game");
-        System.out.print("Please choose a number!(or type exit) :");
-        Scanner scan = new Scanner(System.in);
-        String choice = scan.nextLine();
-        
-        //Terminate the program
-        if (choice.equalsIgnoreCase("exit")){
-            System.out.println("Program Terminated Succesfully");
-            isRunning = false;
-        }
-        
-        
-        switch(choice){
-            case "1" :
-                game.colorGuess();
-            break;
-            
-            case "2":
-                game.fwgGame();
-            break;
-        }
-            
-        }
-        
-        
-    }
-    //FIRE WATER GRASS GAME
-    static void play() {
+    void play() {
     		Scanner scans = new Scanner(System.in);
                 System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
     		System.out.print("Choose (fire, water, grass): ");
@@ -148,13 +108,13 @@ public class GuessColorgame extends gameMech {
         		System.out.print("TIE!\n");
         	}
         	else if(youwin(yourmove, enemymove)) {
-        		System.out.print("You win! you are about to proceed to the next level!\n");
+        		victory();
         	}
         	else {
-        		System.out.print("You lose!\n");
+        		gameOver();
         	}
     	}
-    	static boolean youwin(String yourmove, String enemymove) {
+    boolean youwin(String yourmove, String enemymove) {
             if (yourmove.equalsIgnoreCase("fire")) {
                 return enemymove.equalsIgnoreCase("water");
             } else if (yourmove.equalsIgnoreCase("grass")) {
@@ -164,4 +124,63 @@ public class GuessColorgame extends gameMech {
             }
     
         }
+    
+    //VICTORY MESSAGE HERE!
+        void victory(){
+            System.out.print("Congratulations! You are about to proceed to the next level!\n");
+        }
+        
+    //DEFEAT MESSAGE HERE!
+        void gameOver(){
+            System.out.print("You used your 5 trials.\n");
+            System.out.print("You lose! Better Luck Next Time!\n");
+        }
+    
+    
+}
+
+public class GuessColorgame extends gameMech {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        gameMech game = new gameMech();
+        
+        boolean isRunning = true;
+        
+        while (isRunning){
+        System.out.println("\nWelcome!");
+        
+        System.out.println("-----------------------");
+        System.out.println("1. Color Guess Game ");
+        System.out.println("2. Fire, Water, Grass Game");
+        System.out.print("Please choose a number!(or type exit) :");
+        Scanner scan = new Scanner(System.in);
+        String choice = scan.nextLine();
+   
+        //Terminate the program
+        if (choice.equalsIgnoreCase("exit")){
+            System.out.println("Program Terminated Succesfully");
+            isRunning = false;
+        }
+        
+        
+        switch(choice){
+            case "1" :
+                game.cgGame();
+            break;
+            
+            case "2":
+                game.fwgGame();
+            break;
+        }
+            
+        }
+        
+        
+    }
+    //FIRE WATER GRASS GAME
+        
 }
