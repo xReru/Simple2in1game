@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package guesscolorgame;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.util.*;
 /**
  *
@@ -24,24 +19,33 @@ class gameMech{
     // SETTINGS OF GAME 1 HERE!
 
     void cgGame(){
+        System.out.print("\nWelcome to Color Guess Game\n");
         
         for (int j = 1; j <= 5; j++) {
+            System.out.println("Level " + j);
             playCG();
             
-            if(j == 4) {
+            if(j == 5) {
         		gameOver();
         	}
             }
+        
     }
+
+    /*int test = doThis(1);
     
+    public static int doThis(int l) {
+     l = 1;
+     return l;
+     }*/
+
+
     void playCG(){
-        int lvlCounter = 1;
+        
         String guess;
         String color = null;
-        int i;
-        System.out.print("\nWelcome to Color Guess Game\n");
-        System.out.println("Level " + lvlCounter);
-        lvlCounter++;
+        
+        
         // creating Array for the items
         String []arr = {"Banana","Orange","Apple","Cucumber","Grapes"};
   
@@ -67,7 +71,7 @@ class gameMech{
         }
         
         
-        for(i = 1; i <= 5; i++) {
+        
                 System.out.print("What color is the "+arr[index]+"?\n");
         	System.out.print("Answer=> ");
         	guess = sc.nextLine();
@@ -80,32 +84,32 @@ class gameMech{
                 
                 else {
         		System.out.print(guess+" is not the color of "+arr[index]+"\n");
-                        System.out.println("Level " + lvlCounter);
+                        lose();
+                        
         	}
-        	if(i == 4) {
-        		gameOver();
-        		System.out.print("The color of "+arr[index]+" is "+color+"\n");
-                        break;
-        	}
+                
         	
-        }
+        
 }
 
     
     
     // SETTINGS OF GAME 2 HERE!
     void fwgGame(){
-        for (int j = 0; j < 5; j++) {
+        for (int j = 1; j <= 5; j++) {
+            System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
+            System.out.println("Level " + j);
             playFWG();
-            if(j == 4) {
+            if(j == 5) {
         		gameOver();
         	}
-            }
+        }
+            
     }
     void playFWG() {
-                int lvlCounter = 1;
+                
     		Scanner scans = new Scanner(System.in);
-                System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
+                
     		System.out.print("Choose (fire, water, grass): ");
         	String yourmove = scans.nextLine();
         	
@@ -125,20 +129,15 @@ class gameMech{
                 
         	System.out.print("Your Enemy chose: "+enemymove+"!\n");
         	
-        	if(yourmove.equals(enemymove)) {
-        		System.out.print("TIE!\n");
+        	if(yourmove.equalsIgnoreCase(enemymove)) {
+        		System.out.print("Its a tie!\n");
         	}
         	else if(youwin(yourmove, enemymove)) {
-        				System.out.print("Congratulations! You are about to proceed to the next level!\n");
-        				lvlCounter++;
-                        System.out.println("Level " + lvlCounter);
+        		victory();
         	}
         	else {
-                        System.out.println("Level " + lvlCounter);
-        		gameOver();
+        		lose();
         	}
-        	
-        	
     	}
     boolean youwin(String yourmove, String enemymove) {
             if (yourmove.equalsIgnoreCase("fire")) {
@@ -154,14 +153,22 @@ class gameMech{
     //VICTORY MESSAGE HERE!
         void victory(){
             System.out.print("Congratulations! You won the game!\n");
-            System.exit(0);
+            
         }
         
     //DEFEAT MESSAGE HERE!
+        void lose(){
+            System.out.println("You lose!\n");
+        }    
+        
+        
+    //GAMEOVER MESSAGE HERE!
         void gameOver(){
-            System.out.print("You lose! Better Luck Next Time!\n");
+            System.out.print("Better Luck Next Time!\n");
+            System.exit(0);
+            
         }
-    
+        
     
 }
 
