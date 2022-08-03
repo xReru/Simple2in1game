@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package guesscolorgame;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 import java.util.*;
 /**
  *
@@ -101,8 +106,6 @@ class gameMech{
                 int lvlCounter = 1;
     		Scanner scans = new Scanner(System.in);
                 System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
-                System.out.println("Level " + lvlCounter);
-                lvlCounter++;
     		System.out.print("Choose (fire, water, grass): ");
         	String yourmove = scans.nextLine();
         	
@@ -126,13 +129,16 @@ class gameMech{
         		System.out.print("TIE!\n");
         	}
         	else if(youwin(yourmove, enemymove)) {
+        				System.out.print("Congratulations! You are about to proceed to the next level!\n");
+        				lvlCounter++;
                         System.out.println("Level " + lvlCounter);
-        		victory();
         	}
         	else {
                         System.out.println("Level " + lvlCounter);
         		gameOver();
         	}
+        	
+        	
     	}
     boolean youwin(String yourmove, String enemymove) {
             if (yourmove.equalsIgnoreCase("fire")) {
@@ -147,13 +153,12 @@ class gameMech{
   
     //VICTORY MESSAGE HERE!
         void victory(){
-            System.out.print("Congratulations! You are about to proceed to the next level!\n");
+            System.out.print("Congratulations! You won the game!\n");
             System.exit(0);
         }
         
     //DEFEAT MESSAGE HERE!
         void gameOver(){
-            System.out.print("You used your 5 trials.\n");
             System.out.print("You lose! Better Luck Next Time!\n");
         }
     
