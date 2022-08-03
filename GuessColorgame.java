@@ -14,7 +14,7 @@ import java.util.*;
 // !GAME 2 = FIRE WATER GRASS GAME
 
 class gameMech{
-    
+   
     
     // SETTINGS OF GAME 1 HERE!
 
@@ -29,15 +29,19 @@ class gameMech{
         		gameOver();
         	}
             }
+        if(verifier == 1){
+            gameOver();
+        }
         
     }
 
-    /*int test = doThis(1);
+    static int verifier = 0;
     
-    public static int doThis(int l) {
-     l = 1;
-     return l;
-     }*/
+    public static int doThis(int trigger) {
+     int x = trigger;
+     verifier = x;
+     return x;
+    }
 
 
     void playCG(){
@@ -79,12 +83,13 @@ class gameMech{
         	
                 if(guess.equalsIgnoreCase(color)) {
         		victory();
-
+                        
         	}
                 
                 else {
         		System.out.print(guess+" is not the color of "+arr[index]+"\n");
-                        lose();
+                        gameOver();
+                        doThis(1);
                         
         	}
                 
@@ -100,13 +105,16 @@ class gameMech{
             System.out.print("\nWelcome to Fire,Water,Grass Game!\n");
             System.out.println("Level " + j);
             playFWG();
-            if(j == 5) {
+            if(j == 5 ) {
         		gameOver();
         	}
         }
+        if(verifier == 1){
+            gameOver();
+        }
             
     }
-    void playFWG() {
+     void playFWG() {
                 
     		Scanner scans = new Scanner(System.in);
                 
@@ -114,7 +122,7 @@ class gameMech{
         	String yourmove = scans.nextLine();
         	
         	Random random = new Random();
-        	int randomnum = random.nextInt(3);
+        	int randomnum = random.nextInt(2);
         	
         	String enemymove;
         	if(randomnum == 0) {
@@ -136,14 +144,16 @@ class gameMech{
         		victory();
         	}
         	else {
-        		lose();
+        		gameOver();
+                        doThis(1);
         	}
+                
     	}
-    boolean youwin(String yourmove, String enemymove) {
-            if (yourmove.equalsIgnoreCase("fire")) {
-                return enemymove.equalsIgnoreCase("water");
-            } else if (yourmove.equalsIgnoreCase("grass")) {
+     boolean youwin(String yourmove, String enemymove) {
+            if (yourmove.equalsIgnoreCase("water")) {
                 return enemymove.equalsIgnoreCase("fire");
+            } else if (yourmove.equalsIgnoreCase("grass")) {
+                return enemymove.equalsIgnoreCase("water");
             } else {
                 return enemymove.equalsIgnoreCase("grass");
             }
@@ -151,13 +161,13 @@ class gameMech{
         }
   
     //VICTORY MESSAGE HERE!
-        void victory(){
+         void victory(){
             System.out.print("Congratulations! You won the game!\n");
             
         }
         
     //DEFEAT MESSAGE HERE!
-        void lose(){
+         void lose(){
             System.out.println("You lose!\n");
         }    
         
@@ -168,6 +178,8 @@ class gameMech{
             System.exit(0);
             
         }
+        
+
         
     
 }
